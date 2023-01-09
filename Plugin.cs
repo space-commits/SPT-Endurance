@@ -15,7 +15,7 @@ namespace Endurance
 
             new EnduranceSprintActionPatch().Enable();
             new EnduranceMovementActionPatch().Enable();
-            Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
+            Logger.LogInfo($"Plugin Fontaine's Always Level Endurance (ALE) is loaded!");
         }
     }
 }
