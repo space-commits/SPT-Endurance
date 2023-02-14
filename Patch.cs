@@ -81,7 +81,7 @@ namespace Endurance
     {
         public static bool IsEnduraStrngthType(Type type)
         {
-            return type.GetField("skillsRelatedToHealth") != null && type.GetField("gclass1672_0") != null;
+            return type.GetField("skillsRelatedToHealth") != null && type.GetField("gclass1674_0") != null;
         }
     }
 }
