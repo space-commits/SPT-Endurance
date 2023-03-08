@@ -26,7 +26,7 @@ namespace Endurance
         }
 
         [PatchPrefix]
-        private static bool Prefix(ref float __result, SkillsClass.GStruct202 movement, SkillsClass __instance)
+        private static bool Prefix(ref float __result, SkillsClass.GStruct203 movement, SkillsClass __instance)
         {
             float xp = __instance.Settings.Endurance.SprintAction * (1f + __instance.Settings.Endurance.GainPerFatigueStack * movement.Fatigue);
             if (movement.Overweight <= 0f)
@@ -61,7 +61,7 @@ namespace Endurance
         }
 
         [PatchPrefix]
-        private static bool Prefix(ref float __result, SkillsClass.GStruct202 movement, SkillsClass __instance)
+        private static bool Prefix(ref float __result, SkillsClass.GStruct203 movement, SkillsClass __instance)
         {
             float xp = __instance.Settings.Endurance.MovementAction * (1f + __instance.Settings.Endurance.GainPerFatigueStack * movement.Fatigue);
             if (movement.Overweight <= 0f)
@@ -81,7 +81,7 @@ namespace Endurance
     {
         public static bool IsEnduraStrngthType(Type type)
         {
-            return type.GetField("skillsRelatedToHealth") != null && type.GetField("gclass1674_0") != null;
+            return type.GetField("skillsRelatedToHealth") != null && type.GetField("gclass1677_0") != null;
         }
     }
 }
