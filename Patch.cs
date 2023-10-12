@@ -3,14 +3,14 @@ using Aki.Reflection.Utils;
 using System;
 using System.Linq;
 using System.Reflection;
-using MovementSkill = SkillsClass.GStruct211;
+using SkillMovementStruct = EFT.SkillManager.GStruct213;
+using EFT;
 
 namespace Endurance
 {
 
     public class EnduranceSprintActionPatch : ModulePatch
     {
-
         private static Type _targetType;
         private static MethodInfo _method_0;
 
@@ -26,7 +26,7 @@ namespace Endurance
         }
 
         [PatchPrefix]
-        private static bool Prefix(ref float __result, MovementSkill movement, SkillsClass __instance)
+        private static bool Prefix(ref float __result, SkillMovementStruct movement, SkillManager __instance)
         {
             float xp = __instance.Settings.Endurance.SprintAction * (1f + __instance.Settings.Endurance.GainPerFatigueStack * movement.Fatigue);
             if (movement.Overweight <= 0f)
@@ -35,7 +35,7 @@ namespace Endurance
             }
             else
             {
-                __result = xp * Plugin.enduranceMulti.Value;
+                __result = xp * 0.5f;
             }
 
             return false;
@@ -44,7 +44,6 @@ namespace Endurance
 
     public class EnduranceMovementActionPatch : ModulePatch
     {
-
         private static Type _targetType;
         private static MethodInfo _method_1;
 
@@ -54,14 +53,13 @@ namespace Endurance
             _method_1 = _targetType.GetMethod("method_1", BindingFlags.FlattenHierarchy | BindingFlags.NonPublic | BindingFlags.Instance);
         }
 
-
         protected override MethodBase GetTargetMethod()
         {
             return _method_1;
         }
 
         [PatchPrefix]
-        private static bool Prefix(ref float __result, MovementSkill movement, SkillsClass __instance)
+        private static bool Prefix(ref float __result, SkillMovementStruct movement, SkillManager __instance)
         {
             float xp = __instance.Settings.Endurance.MovementAction * (1f + __instance.Settings.Endurance.GainPerFatigueStack * movement.Fatigue);
             if (movement.Overweight <= 0f)
@@ -70,7 +68,7 @@ namespace Endurance
             }
             else
             {
-                __result = xp * Plugin.enduranceMulti.Value;
+                __result = xp * 0.5f;
             }
 
             return false;
@@ -81,7 +79,7 @@ namespace Endurance
     {
         public static bool IsEnduraStrngthType(Type type)
         {
-            return type.GetField("skillsRelatedToHealth") != null && type.GetField("gclass1742_0") != null;
+            return type.GetField("skillsRelatedToHealth") != null && type.GetField("skillManager_0") != null;
         }
     }
 }
