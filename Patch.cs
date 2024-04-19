@@ -3,7 +3,8 @@ using Aki.Reflection.Utils;
 using System;
 using System.Linq;
 using System.Reflection;
-using MovementSkill = SkillsClass.GStruct211;
+using EFT;
+using SkillMovementStruct = EFT.SkillManager.GStruct228;
 
 namespace Endurance
 {
@@ -16,8 +17,8 @@ namespace Endurance
 
         public EnduranceSprintActionPatch()
         {
-            _targetType = PatchConstants.EftTypes.Single(PlayerHelper.IsEnduraStrngthType);
-            _method_0 = _targetType.GetMethod("method_0", BindingFlags.FlattenHierarchy | BindingFlags.NonPublic | BindingFlags.Instance);
+            _targetType = PatchConstants.EftTypes.Single(EndurancePatchHelper.IsEnduraStrngthType);
+            _method_0 = _targetType.GetMethod("method_0", BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Instance);
         }
 
         protected override MethodBase GetTargetMethod()
@@ -26,7 +27,7 @@ namespace Endurance
         }
 
         [PatchPrefix]
-        private static bool Prefix(ref float __result, MovementSkill movement, SkillsClass __instance)
+        private static bool Prefix(ref float __result, SkillMovementStruct movement, SkillManager __instance)
         {
             float xp = __instance.Settings.Endurance.SprintAction * (1f + __instance.Settings.Endurance.GainPerFatigueStack * movement.Fatigue);
             if (movement.Overweight <= 0f)
@@ -35,7 +36,7 @@ namespace Endurance
             }
             else
             {
-                __result = xp * Plugin.enduranceMulti.Value;
+                __result = xp * 0.5f;
             }
 
             return false;
@@ -50,8 +51,8 @@ namespace Endurance
 
         public EnduranceMovementActionPatch()
         {
-            _targetType = PatchConstants.EftTypes.Single(PlayerHelper.IsEnduraStrngthType);
-            _method_1 = _targetType.GetMethod("method_1", BindingFlags.FlattenHierarchy | BindingFlags.NonPublic | BindingFlags.Instance);
+            _targetType = PatchConstants.EftTypes.Single(EndurancePatchHelper.IsEnduraStrngthType);
+            _method_1 = _targetType.GetMethod("method_1", BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Instance);
         }
 
 
@@ -61,7 +62,7 @@ namespace Endurance
         }
 
         [PatchPrefix]
-        private static bool Prefix(ref float __result, MovementSkill movement, SkillsClass __instance)
+        private static bool Prefix(ref float __result, SkillMovementStruct movement, SkillManager __instance)
         {
             float xp = __instance.Settings.Endurance.MovementAction * (1f + __instance.Settings.Endurance.GainPerFatigueStack * movement.Fatigue);
             if (movement.Overweight <= 0f)
@@ -70,18 +71,18 @@ namespace Endurance
             }
             else
             {
-                __result = xp * Plugin.enduranceMulti.Value;
+                __result = xp * 0.5f;
             }
 
             return false;
         }
     }
 
-    public static class PlayerHelper
+    public static class EndurancePatchHelper
     {
         public static bool IsEnduraStrngthType(Type type)
         {
-            return type.GetField("skillsRelatedToHealth") != null && type.GetField("gclass1742_0") != null;
+            return type.GetField("skillsRelatedToHealth") != null && type.GetField("skillManager_0") != null;
         }
     }
 }
