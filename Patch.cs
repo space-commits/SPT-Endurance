@@ -3,21 +3,22 @@ using Aki.Reflection.Utils;
 using System;
 using System.Linq;
 using System.Reflection;
-using SkillMovementStruct = EFT.SkillManager.GStruct213;
 using EFT;
+using SkillMovementStruct = EFT.SkillManager.GStruct228;
 
 namespace Endurance
 {
 
     public class EnduranceSprintActionPatch : ModulePatch
     {
+
         private static Type _targetType;
         private static MethodInfo _method_0;
 
         public EnduranceSprintActionPatch()
         {
-            _targetType = PatchConstants.EftTypes.Single(PlayerHelper.IsEnduraStrngthType);
-            _method_0 = _targetType.GetMethod("method_0", BindingFlags.FlattenHierarchy | BindingFlags.NonPublic | BindingFlags.Instance);
+            _targetType = PatchConstants.EftTypes.Single(EndurancePatchHelper.IsEnduraStrngthType);
+            _method_0 = _targetType.GetMethod("method_0", BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Instance);
         }
 
         protected override MethodBase GetTargetMethod()
@@ -44,14 +45,16 @@ namespace Endurance
 
     public class EnduranceMovementActionPatch : ModulePatch
     {
+
         private static Type _targetType;
         private static MethodInfo _method_1;
 
         public EnduranceMovementActionPatch()
         {
-            _targetType = PatchConstants.EftTypes.Single(PlayerHelper.IsEnduraStrngthType);
-            _method_1 = _targetType.GetMethod("method_1", BindingFlags.FlattenHierarchy | BindingFlags.NonPublic | BindingFlags.Instance);
+            _targetType = PatchConstants.EftTypes.Single(EndurancePatchHelper.IsEnduraStrngthType);
+            _method_1 = _targetType.GetMethod("method_1", BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Instance);
         }
+
 
         protected override MethodBase GetTargetMethod()
         {
@@ -75,7 +78,7 @@ namespace Endurance
         }
     }
 
-    public static class PlayerHelper
+    public static class EndurancePatchHelper
     {
         public static bool IsEnduraStrngthType(Type type)
         {
