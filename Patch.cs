@@ -1,10 +1,10 @@
-using Aki.Reflection.Patching;
-using Aki.Reflection.Utils;
+using SPT.Reflection.Patching;
+using SPT.Reflection.Utils;
 using System;
 using System.Linq;
 using System.Reflection;
 using EFT;
-using SkillMovementStruct = EFT.SkillManager.GStruct228;
+using SkillMovementStruct = EFT.SkillManager.GStruct229;
 
 namespace Endurance
 {
