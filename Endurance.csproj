@@ -10,10 +10,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="Aki.Reflection" />
-	<Reference Include="ItemComponent.Types"/>
-    <Reference Include="Comfort"/>
+	<Reference Include="ItemComponent.Types" />
+    <Reference Include="Comfort" />
     <Reference Include="Assembly-CSharp" />
+    <Reference Include="spt-reflection">
+      <HintPath>spt-reflection.dll</HintPath>
+    </Reference>
 	<Reference Include="UnityEngine" />
     <Reference Include="UnityEngine.CoreModule" />
     <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
