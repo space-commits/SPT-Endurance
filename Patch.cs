@@ -13,17 +13,17 @@ namespace Endurance
     {
 
         private static Type _targetType;
-        private static MethodInfo _method_0;
+        private static MethodInfo _targetMethod;
 
         public EnduranceSprintActionPatch()
         {
             _targetType = PatchConstants.EftTypes.Single(EndurancePatchHelper.IsEnduraStrngthType);
-            _method_0 = _targetType.GetMethod("method_0", BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Instance);
+            _targetMethod = _targetType.GetMethod("method_0", BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Instance);
         }
 
         protected override MethodBase GetTargetMethod()
         {
-            return _method_0;
+            return _targetMethod;
         }
 
         [PatchPrefix]
