@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using EFT;
-using SkillMovementStruct = EFT.SkillManager.GStruct235;
+using SkillMovementStruct = EFT.SkillManager.GStruct242;
 
 namespace Endurance
 {
